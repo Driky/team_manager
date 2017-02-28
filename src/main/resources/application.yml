@@ -1,0 +1,16 @@
+# Spring specific settings
+spring:
+  application:
+    name: TM - help the team - REST
+  main:
+    show-banner: true
+
+# server configuration
+server:
+  port: 8080
+  contextPath:
+
+# logging
+logging:
+  file: ./logs/app.log
+  level.*: INFO
