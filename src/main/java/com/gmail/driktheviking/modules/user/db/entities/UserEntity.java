@@ -5,6 +5,7 @@ package com.gmail.driktheviking.modules.user.db.entities;
         import lombok.NoArgsConstructor;
 
         import javax.persistence.*;
+        import java.util.Collection;
         import java.util.Date;
 
 @Entity
@@ -37,6 +38,22 @@ public class UserEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_time", nullable = false, insertable = false, updatable = false)
     private Date createdTime;
+
+    @Column(name = "enabled", columnDefinition = "false")
+    private boolean enabled;
+
+    @Column(name = "token_expired")
+    private boolean tokenExpired;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    @Column(name = "roles")
+    private Collection<RoleEntity> roles;
 
     public UserEntity(
             String username,
